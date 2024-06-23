@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>catchemall</title>
+        <style>
+            body {
+                background-color: rgb(12, 12, 32);
+            }
+            .header-main {
+                display: flex;
+                margin-top: 0%;
+                background-color: #ee1515;
+                border-radius: 100px;
+                cursor: pointer;
+            }
+            .header-main img {
+                padding-left: 20px;
+                padding-top: 10px;
+                width: 100px;
+                height: 100px;
+            }
+            .webTitle{
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                font-size: 50px;
+                margin-left: 10px;
+            }   
+            .sword-button{
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                font-size: 25px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-weight: bold;
+                background-color: rgb(44, 153, 255);
+                border-color: rgb(44, 153, 255);
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s;
+                opacity: 0.2;
+            }
+            .sword-button.full-color {
+                opacity: 1;
+            }
+            .sword-button:hover{
+                background-color: rgb(31, 105, 173);
+                color: white;
+                opacity: 1;
+            }
+
+            .shield-button{
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                font-size: 25px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-weight: bold;
+                background-color: rgb(247, 2, 43);
+                border-color: rgb(19, 13, 14);
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s;
+                opacity: 0.2;
+            }
+            .shield-button.full-color {
+                opacity: 1;
+            }
+            .shield-button:hover{
+                background-color: rgb(165, 6, 32);
+                color: white;
+                opacity: 1;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!-- This is the code for a the very top header -->
+        <div class="header-main" onclick="alert('DexAssistant clicked')">
+            <img src="pokeball-header-image.png" alt="pokeball image">
+            <h1 class="webTitle">DexAssistant</h1>
+        </div>
+        <!-- This is the code for the buttons -->
+        <button class="sword-button" onclick="switch_button(this, 'sword_button')">Sword</button>
+
+        <button class="shield-button" onclick="switch_button(this, 'shield_button')">Shield</button>
+
+
+        <!-- Javascript code-->
+        <script>
+            // defining the pokemon class
+            class Pokemon {
+                constructor(name, dexNo, type1, type2) {
+                    this.name = name;
+                    this.dexNo = dexNo;
+                    this.type1 = type1;
+                    this.type2 = type2;
+                }
+            }
+
+            let buttonStates = {
+                sword_button: false,
+                shield_button: false,
+                scarlet_button: false,
+                violet_button: false
+            };
+
+            function switch_button(button, button_name){
+                if(button.classList.contains('full-color')){
+                    button.classList.remove('full-color');
+                    buttonStates[button_name] = false;
+                    
+                }else{
+                    button.classList.add('full-color');
+                    buttonStates[button_name] = true;
+                    }
+                if (buttonStates[button_name] == true){
+                    console.log(`This button ${button_name} is on`);
+                }
+            }
+        </script>
+    </body>
+</html>
