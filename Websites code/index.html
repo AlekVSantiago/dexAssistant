@@ -25,6 +25,19 @@
                 font-size: 50px;
                 margin-left: 10px;
             }   
+
+            .game-button-collection{
+                align-self: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 50px;
+                border-radius: 20px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                background-color: rgb(88, 88, 88);
+            }
+
             .sword-button{
                 padding-left: 20px;
                 padding-right: 20px;
@@ -117,6 +130,22 @@
                 color: white;
                 opacity: 1;
             }
+
+            .calculate-button{
+                margin: 0 auto;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                font-size: 25px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-weight: bold;
+                background-color: #777777;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s;
+                opacity: 0.2;
+            }
         </style>
 
     </head>
@@ -126,14 +155,20 @@
             <img src="pokeball-header-image.png" alt="pokeball image">
             <h1 class="webTitle">DexAssistant</h1>
         </div>
-        <!-- This is the code for the buttons -->
-        <button class="sword-button" onclick="switch_button(this, 'sword_button')">Sword</button>
+        
 
-        <button class="shield-button" onclick="switch_button(this, 'shield_button')">Shield</button>
+        <div class="game-button-collection">
+            <button class="sword-button" onclick="switch_button(this, 'sword_button')">Sword</button>
 
-        <button class="scarlet-button" onclick="switch_button(this, 'sword_button')">Scarlet</button>
+            <button class="shield-button" onclick="switch_button(this, 'shield_button')">Shield</button>
 
-        <button class="violet-button" onclick="switch_button(this, 'shield_button')">Violet</button>
+            <button class="scarlet-button" onclick="switch_button(this, 'scarlet_button')">Scarlet</button>
+
+            <button class="violet-button" onclick="switch_button(this, 'violet_button')">Violet</button>
+
+            
+        </div>
+        <button class="calculate-button" onclick="">calculate</button>
 
 
         <!-- Javascript code-->
