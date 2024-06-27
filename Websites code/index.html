@@ -1,575 +1,223 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>catchemall</title>
-        <style>
-            body {
-                background-color: rgb(12, 12, 32);
-            }
-            .header-main {
-                display: flex;
-                margin-top: 0%;
-                background-color: #ee1515;
-                border-radius: 100px;
-                cursor: pointer;
-            }
-            .header-main img {
-                padding-left: 20px;
-                padding-top: 10px;
-                width: 100px;
-                height: 100px;
-            }
-            .webTitle{
-                font-family: Arial, Helvetica, sans-serif;
-                color: white;
-                font-size: 50px;
-                margin-left: 10px;
-            }
-            
-            .first_row{
-                display: block;
-            }
+<head>
+    <title>catchemall</title>
+    <style>
+        body {
+            background-color: rgb(12, 12, 32);
+        }
+        .header-main {
+            display: flex;
+            margin-top: 0%;
+            background-color: #ee1515;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+        .header-main img {
+            padding-left: 20px;
+            padding-top: 10px;
+            width: 100px;
+            height: 100px;
+        }
+        .webTitle {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            font-size: 50px;
+            margin-left: 10px;
+        }
+        .game-button-collection {
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            border-radius: 20px;
+            padding-top: 0px;
+            padding-bottom: 10px;
+        }
+        .lets_go_pikachu-button,
+        .lets_go_eevee-button,
+        .sword-button,
+        .shield-button,
+        .scarlet-button,
+        .violet-button {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            font-size: 25px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0.2;
+        }
+        .lets_go_pikachu-button {
+            background-color: rgb(232, 235, 65);
+        }
+        .lets_go_pikachu-button.full-color {
+            opacity: 1;
+        }
+        .lets_go_pikachu-button:hover {
+            background-color: rgb(255, 252, 72);
+            color: rgb(255, 31, 31);
+            opacity: 1;
+        }
+        .lets_go_eevee-button {
+            background-color: rgb(179, 86, 10);
+        }
+        .lets_go_eevee-button.full-color {
+            opacity: 1;
+        }
+        .lets_go_eevee-button:hover {
+            background-color: rgb(197, 128, 37);
+            color: rgb(255, 255, 255);
+            opacity: 1;
+        }
+        .sword-button {
+            background-color: rgb(44, 153, 255);
+        }
+        .sword-button.full-color {
+            opacity: 1;
+        }
+        .sword-button:hover {
+            background-color: rgb(31, 105, 173);
+            color: white;
+            opacity: 1;
+        }
+        .shield-button {
+            background-color: rgb(247, 2, 43);
+        }
+        .shield-button.full-color {
+            opacity: 1;
+        }
+        .shield-button:hover {
+            background-color: rgb(165, 6, 32);
+            color: white;
+            opacity: 1;
+        }
+        .scarlet-button {
+            background-color: #ff2400;
+        }
+        .scarlet-button.full-color {
+            opacity: 1;
+        }
+        .scarlet-button:hover {
+            background-color: #ff2400;
+            color: white;
+            opacity: 1;
+        }
+        .violet-button {
+            background-color: #8F00FF;
+        }
+        .violet-button.full-color {
+            opacity: 1;
+        }
+        .violet-button:hover {
+            background-color: #8F00FF;
+            color: white;
+            opacity: 1;
+        }
+        .calculate-button {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            font-size: 25px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            background-color: #777777;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .calculate-button:hover {
+            background-color: #949494;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- This is the code for the very top header -->
+    <div class="header-main" onclick="alert('DexAssistant clicked')">
+        <img src="pokeball-header-image.png" alt="pokeball image">
+        <h1 class="webTitle">DexAssistant</h1>
+    </div>
 
-            .game-button-collection{
-                align-self: center;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 50px;
-                border-radius: 20px;
-                padding-top: 0px;
-                padding-bottom: 10px;
-            }
+    <div class="game-button-collection">
+        <button class="lets_go_pikachu-button" onclick="switch_button(this, 'LetsGoPikachu')">Let's Go Pikachu</button>
+        <button class="lets_go_eevee-button" onclick="switch_button(this, 'LetsGoEevee')">Let's Go Eevee</button>
+    </div>
+    <div class="game-button-collection">
+        <button class="sword-button" onclick="switch_button(this, 'Sword')">Sword</button>
+        <button class="shield-button" onclick="switch_button(this, 'Shield')">Shield</button>
+        <button class="scarlet-button" onclick="switch_button(this, 'Scarlet')">Scarlet</button>
+        <button class="violet-button" onclick="switch_button(this, 'Violet')">Violet</button>
+    </div>
+    <button class="calculate-button" onclick="calculateCatchablePokemon()">calculate</button>
 
-            .lets_go_pikachu-button{
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-weight: bold;
-                background-color: rgb(232, 235, 65);
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s;
-                opacity: 0.2;
+    <script>
+        class Pokemon {
+            constructor(name, dexNo, type1, type2) {
+                this.name = name;
+                this.dexNo = dexNo;
+                this.type1 = type1;
+                this.type2 = type2;
             }
-            .lets_go_pikachu-button.full-color {
-                opacity: 1;
-            }
-            .lets_go_pikachu-button:hover{
-                background-color: rgb(255, 252, 72);
-                color: rgb(255, 31, 31);
-                opacity: 1;
-            }
+        }
 
-            .lets_go_eevee-button{
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-weight: bold;
-                background-color: rgb(179, 86, 10);
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s;
-                opacity: 0.2;
+        class Game {
+            constructor(name, pkmn_list) {
+                this.name = name;
+                this.on_off = false;
+                this.pkmn_list = pkmn_list;
             }
-            .lets_go_eevee-button.full-color {
-                opacity: 1;
-            }
-            .lets_go_eevee-button:hover{
-                background-color: rgb(197, 128, 37);
-                color: rgb(255, 255, 255);
-                opacity: 1;
-            }
+        }
 
-            .sword-button{
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-weight: bold;
-                background-color: rgb(44, 153, 255);
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s;
-                opacity: 0.2;
+        function switch_button(button, gameName) {
+            const game = gameMap.get(gameName);
+            game.on_off = !game.on_off;
+            if (game.on_off) {
+                button.classList.add("full-color");
+            } else {
+                button.classList.remove("full-color");
             }
-            .sword-button.full-color {
-                opacity: 1;
-            }
-            .sword-button:hover{
-                background-color: rgb(31, 105, 173);
-                color: white;
-                opacity: 1;
-            }
+            console.log(`${game.name} is now ${game.on_off ? "on" : "off"}`);
+        }
 
-            .shield-button{
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-weight: bold;
-                background-color: rgb(247, 2, 43);
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s;
-                opacity: 0.2;
-            }
-            .shield-button.full-color {
-                opacity: 1;
-            }
-            .shield-button:hover{
-                background-color: rgb(165, 6, 32);
-                color: white;
-                opacity: 1;
-            }
+        function calculateCatchablePokemon() {
+            let availablePokemon = [];
+            gameMap.forEach(game => {
+                if (game.on_off) {
+                    availablePokemon = availablePokemon.concat(game.pkmn_list);
+                }
+            });
+            console.log(availablePokemon);
+        }
 
-            .scarlet-button{
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                background-color: #ff2400;
-                font-weight: bold;
-                background-color: scarlet;
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s;
-                opacity: 0.2;
-            }
-            .scarlet-button.full-color {
-                opacity: 1;
-            }
-            .scarlet-button:hover{
-                background-color: #ff2400;
-                color: white;
-                opacity: 1;
-            }
+        const bulbasaur = new Pokemon("Bulbasaur", 1, "Grass", "Poison");
+        // Add all other Pokemon instances here...
 
-            .violet-button{
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-weight: bold;
-                background-color:  #8F00FF;
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s;
-                opacity: 0.2;
-            }
-            .violet-button.full-color {
-                opacity: 1;
-            }
-            .violet-button:hover{
-                background-color:  #8F00FF;
-                color: white;
-                opacity: 1;
-            }
+        const lgp_available = [bulbasaur /*, other Pokémon instances */];
+        const lge_available = [bulbasaur /*, other Pokémon instances */];
 
-            .calculate-button{
-                display: flex;
-                justify-content: center;
-                margin: 0 auto;
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 3px;
-                padding-bottom: 3px;
-                font-size: 25px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                font-weight: bold;
-                background-color: #777777;
-                border-radius: 30px;
-                cursor: pointer;
-                transition: all 0.3s;
-            }
-
-            .calculate-button:hover{
-                background-color: #949494;
-                color: white;
-            }
-        </style>
-
-    </head>
-    <body>
-        <!-- This is the code for a the very top header -->
-        <div class="header-main" onclick="alert('DexAssistant clicked')">
-            <img src="pokeball-header-image.png" alt="pokeball image">
-            <h1 class="webTitle">DexAssistant</h1>
-        </div>
+        const LetsGoPikachu = new Game("Let's Go Pikachu", lgp_available);
+        const LetsGoEevee = new Game("Let's Go Eevee", lge_available);
+        const Sword = new Game("Sword", sword_available);
+        const Shield = new Game("Shield", shield_available);
+        const Scarlet = new Game("Scarlet", scarlet_available);
+        const Violet = new Game("Violet", violet_available);
         
-        <div class="game-button-collection">
-            <button class="lets_go_pikachu-button" onclick="switch_button(this, 'lgp_button')">Let's Go Pikachu</button>
-            <button class="lets_go_eevee-button" onclick="switch_button(this, 'lge_button')">Let's Go Eevee</button>
-        </div>
-        <div class="game-button-collection">
-            
-            <button class="sword-button" onclick="switch_button(this, 'sword_button')">Sword</button>
 
-            <button class="shield-button" onclick="switch_button(this, 'shield_button')">Shield</button>
+        const gameMap = new Map();
+        gameMap.set("LetsGoPikachu", LetsGoPikachu);
+        gameMap.set("LetsGoEevee", LetsGoEevee);
+        // Add other games to the map...
 
-            <button class="scarlet-button" onclick="switch_button(this, 'scarlet_button')">Scarlet</button>
-
-            <button class="violet-button" onclick="switch_button(this, 'violet_button')">Violet</button>
-
-            
-        </div>
-        <button class="calculate-button" onclick="calculateCatchablePokemon()">calculate</button>
-
-
-        <script>
-            // defining the pokemon class
-            class Pokemon {
-                constructor(name, dexNo, type1, type2) {
-                    this.name = name;
-                    this.dexNo = dexNo;
-                    this.type1 = type1;
-                    this.type2 = type2;
-                }
-            }
-
-            class game{
-                constructor(name, on_off, pkmn_list){
-                    this.name = name;
-                    this.on_off = on_off;
-                    this.pkmn_list = pkmn_list;
-                }
-            }
-
-          
-
-            //instances of all of the pokemon
-            const bulbasaur = new Pokemon("Bulbasaur", 1, "Grass", "Poison", "Normal");
-            const ivysaur = new Pokemon("Ivysaur", 2, "Grass", "Poison", "Normal");
-            const venusaur = new Pokemon("Venusaur", 3, "Grass", "Poison", "Normal");
-            const charmander = new Pokemon("Charmander", 4, "Fire", null, "Normal");
-            const charmeleon = new Pokemon("Charmeleon", 5, "Fire", null, "Normal");
-            const charizard = new Pokemon("Charizard", 6, "Fire", "Flying", "Normal");
-            const squirtle = new Pokemon("Squirtle", 7, "Water", null, "Normal");
-            const wartortle = new Pokemon("Wartortle", 8, "Water", null, "Normal");
-            const blastoise = new Pokemon("Blastoise", 9, "Water", null, "Normal");
-            const caterpie = new Pokemon("Caterpie", 10, "Bug", null, "Normal");
-            const metapod = new Pokemon("Metapod", 11, "Bug", null, "Normal");
-            const butterfree = new Pokemon("Butterfree", 12, "Bug", "Flying", "Normal");
-            const weedle = new Pokemon("Weedle", 13, "Bug", "Poison", "Normal");
-            const kakuna = new Pokemon("Kakuna", 14, "Bug", "Poison", "Normal");
-            const beedrill = new Pokemon("Beedrill", 15, "Bug", "Poison", "Normal");
-            const pidgey = new Pokemon("Pidgey", 16, "Normal", "Flying", "Normal");
-            const pidgeotto = new Pokemon("Pidgeotto", 17, "Normal", "Flying", "Normal");
-            const pidgeot = new Pokemon("Pidgeot", 18, "Normal", "Flying", "Normal");
-            const rattata = new Pokemon("Rattata", 19, "Normal", null, "Normal");
-            const raticate = new Pokemon("Raticate", 20, "Normal", null, "Normal");
-            const spearow = new Pokemon("Spearow", 21, "Normal", "Flying", "Normal");
-            const fearow = new Pokemon("Fearow", 22, "Normal", "Flying", "Normal");
-            const ekans = new Pokemon("Ekans", 23, "Poison", null, "Normal");
-            const arbok = new Pokemon("Arbok", 24, "Poison", null, "Normal");
-            const pikachu = new Pokemon("Pikachu", 25, "Electric", null, "Normal");
-            const raichu = new Pokemon("Raichu", 26, "Electric", null, "Normal");
-            const sandshrew = new Pokemon("Sandshrew", 27, "Ground", null, "Normal");
-            const sandslash = new Pokemon("Sandslash", 28, "Ground", null, "Normal");
-            const nidoranFemale = new Pokemon("Nidoran♀", 29, "Poison", null, "Normal");
-            const nidorina = new Pokemon("Nidorina", 30, "Poison", null, "Normal");
-            const nidoqueen = new Pokemon("Nidoqueen", 31, "Poison", "Ground", "Normal");
-            const nidoranMale = new Pokemon("Nidoran♂", 32, "Poison", null, "Normal");
-            const nidorino = new Pokemon("Nidorino", 33, "Poison", null, "Normal");
-            const nidoking = new Pokemon("Nidoking", 34, "Poison", "Ground", "Normal");
-            const clefairy = new Pokemon("Clefairy", 35, "Fairy", null, "Normal");
-            const clefable = new Pokemon("Clefable", 36, "Fairy", null, "Normal");
-            const vulpix = new Pokemon("Vulpix", 37, "Fire", null, "Normal");
-            const ninetales = new Pokemon("Ninetales", 38, "Fire", null, "Normal");
-            const jigglypuff = new Pokemon("Jigglypuff", 39, "Normal", "Fairy", "Normal");
-            const wigglytuff = new Pokemon("Wigglytuff", 40, "Normal", "Fairy", "Normal");
-            const zubat = new Pokemon("Zubat", 41, "Poison", "Flying", "Normal");
-            const golbat = new Pokemon("Golbat", 42, "Poison", "Flying", "Normal");
-            const oddish = new Pokemon("Oddish", 43, "Grass", "Poison", "Normal");
-            const gloom = new Pokemon("Gloom", 44, "Grass", "Poison", "Normal");
-            const vileplume = new Pokemon("Vileplume", 45, "Grass", "Poison", "Normal");
-            const paras = new Pokemon("Paras", 46, "Bug", "Grass", "Normal");
-            const parasect = new Pokemon("Parasect", 47, "Bug", "Grass", "Normal");
-            const venonat = new Pokemon("Venonat", 48, "Bug", "Poison", "Normal");
-            const venomoth = new Pokemon("Venomoth", 49, "Bug", "Poison", "Normal");
-            const diglett = new Pokemon("Diglett", 50, "Ground", null, "Normal");
-            const dugtrio = new Pokemon("Dugtrio", 51, "Ground", null, "Normal");
-            const meowth = new Pokemon("Meowth", 52, "Normal", null, "Normal");
-            const persian = new Pokemon("Persian", 53, "Normal", null, "Normal");
-            const psyduck = new Pokemon("Psyduck", 54, "Water", null, "Normal");
-            const golduck = new Pokemon("Golduck", 55, "Water", null, "Normal");
-            const mankey = new Pokemon("Mankey", 56, "Fighting", null, "Normal");
-            const primeape = new Pokemon("Primeape", 57, "Fighting", null, "Normal");
-            const growlithe = new Pokemon("Growlithe", 58, "Fire", null, "Normal");
-            const arcanine = new Pokemon("Arcanine", 59, "Fire", null, "Normal");
-            const poliwag = new Pokemon("Poliwag", 60, "Water", null, "Normal");
-            const poliwhirl = new Pokemon("Poliwhirl", 61, "Water", null, "Normal");
-            const poliwrath = new Pokemon("Poliwrath", 62, "Water", "Fighting", "Normal");
-            const abra = new Pokemon("Abra", 63, "Psychic", null, "Normal");
-            const kadabra = new Pokemon("Kadabra", 64, "Psychic", null, "Normal");
-            const alakazam = new Pokemon("Alakazam", 65, "Psychic", null, "Normal");
-            const machop = new Pokemon("Machop", 66, "Fighting", null, "Normal");
-            const machoke = new Pokemon("Machoke", 67, "Fighting", null, "Normal");
-            const machamp = new Pokemon("Machamp", 68, "Fighting", null, "Normal");
-            const bellsprout = new Pokemon("Bellsprout", 69, "Grass", "Poison", "Normal");
-            const weepinbell = new Pokemon("Weepinbell", 70, "Grass", "Poison", "Normal");
-            const victreebel = new Pokemon("Victreebel", 71, "Grass", "Poison", "Normal");
-            const tentacool = new Pokemon("Tentacool", 72, "Water", "Poison", "Normal");
-            const tentacruel = new Pokemon("Tentacruel", 73, "Water", "Poison", "Normal");
-            const geodude = new Pokemon("Geodude", 74, "Rock", "Ground", "Normal");
-            const graveler = new Pokemon("Graveler", 75, "Rock", "Ground", "Normal");
-            const golem = new Pokemon("Golem", 76, "Rock", "Ground", "Normal");
-            const ponyta = new Pokemon("Ponyta", 77, "Fire", null, "Normal");
-            const rapidash = new Pokemon("Rapidash", 78, "Fire", null, "Normal");
-            const slowpoke = new Pokemon("Slowpoke", 79, "Water", "Psychic", "Normal");
-            const slowbro = new Pokemon("Slowbro", 80, "Water", "Psychic", "Normal");
-            const magnemite = new Pokemon("Magnemite", 81, "Electric", "Steel", "Normal");
-            const magneton = new Pokemon("Magneton", 82, "Electric", "Steel", "Normal");
-            const farfetchd = new Pokemon("Farfetch'd", 83, "Normal", "Flying", "Normal");
-            const doduo = new Pokemon("Doduo", 84, "Normal", "Flying", "Normal");
-            const dodrio = new Pokemon("Dodrio", 85, "Normal", "Flying", "Normal");
-            const seel = new Pokemon("Seel", 86, "Water", null, "Normal");
-            const dewgong = new Pokemon("Dewgong", 87, "Water", "Ice", "Normal");
-            const grimer = new Pokemon("Grimer", 88, "Poison", null, "Normal");
-            const muk = new Pokemon("Muk", 89, "Poison", null, "Normal");
-            const shellder = new Pokemon("Shellder", 90, "Water", null, "Normal");
-            const cloyster = new Pokemon("Cloyster", 91, "Water", "Ice", "Normal");
-            const gastly = new Pokemon("Gastly", 92, "Ghost", "Poison", "Normal");
-            const haunter = new Pokemon("Haunter", 93, "Ghost", "Poison", "Normal");
-            const gengar = new Pokemon("Gengar", 94, "Ghost", "Poison", "Normal");
-            const onix = new Pokemon("Onix", 95, "Rock", "Ground", "Normal");
-            const drowzee = new Pokemon("Drowzee", 96, "Psychic", null, "Normal");
-            const hypno = new Pokemon("Hypno", 97, "Psychic", null, "Normal");
-            const krabby = new Pokemon("Krabby", 98, "Water", null, "Normal");
-            const kingler = new Pokemon("Kingler", 99, "Water", null, "Normal");
-            const voltorb = new Pokemon("Voltorb", 100, "Electric", null, "Normal");
-            const electrode = new Pokemon("Electrode", 101, "Electric", null, "Normal");
-            const exeggcute = new Pokemon("Exeggcute", 102, "Grass", "Psychic", "Normal");
-            const exeggutor = new Pokemon("Exeggutor", 103, "Grass", "Psychic", "Normal");
-            const cubone = new Pokemon("Cubone", 104, "Ground", null, "Normal");
-            const marowak = new Pokemon("Marowak", 105, "Ground", null, "Normal");
-            const hitmonlee = new Pokemon("Hitmonlee", 106, "Fighting", null, "Normal");
-            const hitmonchan = new Pokemon("Hitmonchan", 107, "Fighting", null, "Normal");
-            const lickitung = new Pokemon("Lickitung", 108, "Normal", null, "Normal");
-            const koffing = new Pokemon("Koffing", 109, "Poison", null, "Normal");
-            const weezing = new Pokemon("Weezing", 110, "Poison", null, "Normal");
-            const rhyhorn = new Pokemon("Rhyhorn", 111, "Ground", "Rock", "Normal");
-            const rhydon = new Pokemon("Rhydon", 112, "Ground", "Rock", "Normal");
-            const chansey = new Pokemon("Chansey", 113, "Normal", null, "Normal");
-            const tangela = new Pokemon("Tangela", 114, "Grass", null, "Normal");
-            const kangaskhan = new Pokemon("Kangaskhan", 115, "Normal", null, "Normal");
-            const horsea = new Pokemon("Horsea", 116, "Water", null, "Normal");
-            const seadra = new Pokemon("Seadra", 117, "Water", null, "Normal");
-            const goldeen = new Pokemon("Goldeen", 118, "Water", null, "Normal");
-            const seaking = new Pokemon("Seaking", 119, "Water", null, "Normal");
-            const staryu = new Pokemon("Staryu", 120, "Water", null, "Normal");
-            const starmie = new Pokemon("Starmie", 121, "Water", "Psychic", "Normal");
-            const mrMime = new Pokemon("Mr. Mime", 122, "Psychic", "Fairy", "Normal");
-            const scyther = new Pokemon("Scyther", 123, "Bug", "Flying", "Normal");
-            const jynx = new Pokemon("Jynx", 124, "Ice", "Psychic", "Normal");
-            const electabuzz = new Pokemon("Electabuzz", 125, "Electric", null, "Normal");
-            const magmar = new Pokemon("Magmar", 126, "Fire", null, "Normal");
-            const pinsir = new Pokemon("Pinsir", 127, "Bug", null, "Normal");
-            const tauros = new Pokemon("Tauros", 128, "Normal", null, "Normal");
-            const magikarp = new Pokemon("Magikarp", 129, "Water", null, "Normal");
-            const gyarados = new Pokemon("Gyarados", 130, "Water", "Flying", "Normal");
-            const lapras = new Pokemon("Lapras", 131, "Water", "Ice", "Normal");
-            const ditto = new Pokemon("Ditto", 132, "Normal", null, "Normal");
-            const eevee = new Pokemon("Eevee", 133, "Normal", null, "Normal");
-            const vaporeon = new Pokemon("Vaporeon", 134, "Water", null, "Normal");
-            const jolteon = new Pokemon("Jolteon", 135, "Electric", null, "Normal");
-            const flareon = new Pokemon("Flareon", 136, "Fire", null, "Normal");
-            const porygon = new Pokemon("Porygon", 137, "Normal", null, "Normal");
-            const omanyte = new Pokemon("Omanyte", 138, "Rock", "Water", "Normal");
-            const omastar = new Pokemon("Omastar", 139, "Rock", "Water", "Normal");
-            const kabuto = new Pokemon("Kabuto", 140, "Rock", "Water", "Normal");
-            const kabutops = new Pokemon("Kabutops", 141, "Rock", "Water", "Normal");
-            const aerodactyl = new Pokemon("Aerodactyl", 142, "Rock", "Flying", "Normal");
-            const snorlax = new Pokemon("Snorlax", 143, "Normal", null, "Normal");
-            const articuno = new Pokemon("Articuno", 144, "Ice", "Flying", "Legendary");
-            const zapdos = new Pokemon("Zapdos", 145, "Electric", "Flying", "Legendary");
-            const moltres = new Pokemon("Moltres", 146, "Fire", "Flying", "Legendary");
-            const dratini = new Pokemon("Dratini", 147, "Dragon", null, "Normal");
-            const dragonair = new Pokemon("Dragonair", 148, "Dragon", null, "Normal");
-            const dragonite = new Pokemon("Dragonite", 149, "Dragon", "Flying", "Normal");
-            const mewtwo = new Pokemon("Mewtwo", 150, "Psychic", null, "Legendary");
-            const mew = new Pokemon("Mew", 151, "Psychic", null, "Mythical");
-            
-
-            //hashmap of all the pokemon
-            const pokemonMap = new Map();
-            pokemonMap.set(bulbasaur.name, bulbasaur);
-            pokemonMap.set(ivysaur.name, ivysaur);
-            pokemonMap.set(venusaur.name, venusaur);
-            pokemonMap.set(charmander.name, charmander);
-            pokemonMap.set(charmeleon.name, charmeleon);
-            pokemonMap.set(charizard.name, charizard);
-            pokemonMap.set(squirtle.name, squirtle);
-            pokemonMap.set(wartortle.name, wartortle);
-            pokemonMap.set(blastoise.name, blastoise);
-            pokemonMap.set(caterpie.name, caterpie);
-            pokemonMap.set(metapod.name, metapod);
-            pokemonMap.set(butterfree.name, butterfree);
-            pokemonMap.set(weedle.name, weedle);
-            pokemonMap.set(kakuna.name, kakuna);
-            pokemonMap.set(beedrill.name, beedrill);
-            pokemonMap.set(pidgey.name, pidgey);
-            pokemonMap.set(pidgeotto.name, pidgeotto);
-            pokemonMap.set(pidgeot.name, pidgeot);
-            pokemonMap.set(rattata.name, rattata);
-            pokemonMap.set(raticate.name, raticate);
-            pokemonMap.set(spearow.name, spearow);
-            pokemonMap.set(fearow.name, fearow);
-            pokemonMap.set(ekans.name, ekans);
-            pokemonMap.set(arbok.name, arbok);
-            pokemonMap.set(pikachu.name, pikachu);
-            pokemonMap.set(raichu.name, raichu);
-            pokemonMap.set(sandshrew.name, sandshrew);
-            pokemonMap.set(sandslash.name, sandslash);
-            pokemonMap.set(nidoranFemale.name, nidoranFemale);
-            pokemonMap.set(nidorina.name, nidorina);
-            pokemonMap.set(nidoqueen.name, nidoqueen);
-            pokemonMap.set(nidoranMale.name, nidoranMale);
-            pokemonMap.set(nidorino.name, nidorino);
-            pokemonMap.set(nidoking.name, nidoking);
-            pokemonMap.set(clefairy.name, clefairy);
-            pokemonMap.set(clefable.name, clefable);
-            pokemonMap.set(vulpix.name, vulpix);
-            pokemonMap.set(ninetales.name, ninetales);
-            pokemonMap.set(jigglypuff.name, jigglypuff);
-            pokemonMap.set(wigglytuff.name, wigglytuff);
-            pokemonMap.set(zubat.name, zubat);
-            pokemonMap.set(golbat.name, golbat);
-            pokemonMap.set(oddish.name, oddish);
-            pokemonMap.set(gloom.name, gloom);
-            pokemonMap.set(vileplume.name, vileplume);
-            pokemonMap.set(paras.name, paras);
-            pokemonMap.set(parasect.name, parasect);
-            pokemonMap.set(venonat.name, venonat);
-            pokemonMap.set(venomoth.name, venomoth);
-            pokemonMap.set(diglett.name, diglett);
-            pokemonMap.set(dugtrio.name, dugtrio);
-            pokemonMap.set(meowth.name, meowth);
-            pokemonMap.set(persian.name, persian);
-            pokemonMap.set(psyduck.name, psyduck);
-            pokemonMap.set(golduck.name, golduck);
-            pokemonMap.set(mankey.name, mankey);
-            pokemonMap.set(primeape.name, primeape);
-            pokemonMap.set(growlithe.name, growlithe);
-            pokemonMap.set(arcanine.name, arcanine);
-            pokemonMap.set(poliwag.name, poliwag);
-            pokemonMap.set(poliwhirl.name, poliwhirl);
-            pokemonMap.set(poliwrath.name, poliwrath);
-            pokemonMap.set(abra.name, abra);
-            pokemonMap.set(kadabra.name, kadabra);
-            pokemonMap.set(alakazam.name, alakazam);
-            pokemonMap.set(machop.name, machop);
-            pokemonMap.set(machoke.name, machoke);
-            pokemonMap.set(machamp.name, machamp);
-            pokemonMap.set(bellsprout.name, bellsprout);
-            pokemonMap.set(weepinbell.name, weepinbell);
-            pokemonMap.set(victreebel.name, victreebel);
-            pokemonMap.set(tentacool.name, tentacool);
-            pokemonMap.set(tentacruel.name, tentacruel);
-            pokemonMap.set(geodude.name, geodude);
-            pokemonMap.set(graveler.name, graveler);
-            pokemonMap.set(golem.name, golem);
-            pokemonMap.set(ponyta.name, ponyta);
-            pokemonMap.set(rapidash.name, rapidash);
-            pokemonMap.set(slowpoke.name, slowpoke);
-            pokemonMap.set(slowbro.name, slowbro);
-            pokemonMap.set(magnemite.name, magnemite);
-            pokemonMap.set(magneton.name, magneton);
-            pokemonMap.set(farfetchd.name, farfetchd);
-            pokemonMap.set(doduo.name, doduo);
-            pokemonMap.set(dodrio.name, dodrio);
-            pokemonMap.set(seel.name, seel);
-            pokemonMap.set(dewgong.name, dewgong);
-            pokemonMap.set(grimer.name, grimer);
-            pokemonMap.set(muk.name, muk);
-            pokemonMap.set(shellder.name, shellder);
-            pokemonMap.set(cloyster.name, cloyster);
-            pokemonMap.set(gastly.name, gastly);
-            pokemonMap.set(haunter.name, haunter);
-            pokemonMap.set(gengar.name, gengar);
-            pokemonMap.set(onix.name, onix);
-            pokemonMap.set(drowzee.name, drowzee);
-            pokemonMap.set(hypno.name, hypno);
-            pokemonMap.set(krabby.name, krabby);
-            pokemonMap.set(kingler.name, kingler);
-            pokemonMap.set(voltorb.name, voltorb);
-            pokemonMap.set(electrode.name, electrode);
-            pokemonMap.set(exeggcute.name, exeggcute);
-            pokemonMap.set(exeggutor.name, exeggutor);
-            pokemonMap.set(cubone.name, cubone);
-            pokemonMap.set(marowak.name, marowak);
-            pokemonMap.set(hitmonlee.name, hitmonlee);
-            pokemonMap.set(hitmonchan.name, hitmonchan);
-            pokemonMap.set(lickitung.name, lickitung);
-            pokemonMap.set(koffing.name, koffing);
-            pokemonMap.set(weezing.name, weezing);
-            pokemonMap.set(rhyhorn.name, rhyhorn);
-            pokemonMap.set(rhydon.name, rhydon);
-            pokemonMap.set(chansey.name, chansey);
-            pokemonMap.set(tangela.name, tangela);
-            pokemonMap.set(kangaskhan.name, kangaskhan);
-            pokemonMap.set(horsea.name, horsea);
-            pokemonMap.set(seadra.name, seadra);
-            pokemonMap.set(goldeen.name, goldeen);
-            pokemonMap.set(seaking.name, seaking);
-            pokemonMap.set(staryu.name, staryu);
-            pokemonMap.set(starmie.name, starmie);
-            pokemonMap.set(mrMime.name, mrMime);
-            pokemonMap.set(scyther.name, scyther);
-            pokemonMap.set(jynx.name, jynx);
-            pokemonMap.set(electabuzz.name, electabuzz);
-            pokemonMap.set(magmar.name, magmar);
-            pokemonMap.set(pinsir.name, pinsir);
-            pokemonMap.set(tauros.name, tauros);
-            pokemonMap.set(magikarp.name, magikarp);
-            pokemonMap.set(gyarados.name, gyarados);
-            pokemonMap.set(lapras.name, lapras);
-            pokemonMap.set(ditto.name, ditto);
-            pokemonMap.set(eevee.name, eevee);
-            pokemonMap.set(vaporeon.name, vaporeon);
-            pokemonMap.set(jolteon.name, jolteon);
-            pokemonMap.set(flareon.name, flareon);
-            pokemonMap.set(porygon.name, porygon);
-            pokemonMap.set(omanyte.name, omanyte);
-            pokemonMap.set(omastar.name, omastar);
-            pokemonMap.set(kabuto.name, kabuto);
-            pokemonMap.set(kabutops.name, kabutops);
-            pokemonMap.set(aerodactyl.name, aerodactyl);
-            pokemonMap.set(snorlax.name, snorlax);
-            pokemonMap.set(articuno.name, articuno);
-            pokemonMap.set(zapdos.name, zapdos);
-            pokemonMap.set(moltres.name, moltres);
-            pokemonMap.set(dratini.name, dratini);
-            pokemonMap.set(dragonair.name, dragonair);
-            pokemonMap.set(dragonite.name, dragonite);
-            pokemonMap.set(mewtwo.name, mewtwo);
-            pokemonMap.set(mew.name, mew);
-
-
-
-            let LetsGoPikachu = new game("Lets Go Pikachu", false, lgp_available);
-            //all pokemon available in let's go pikachu
-            LetsGoEevee.lgp_available = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranFemale, nidorina, nidoqueen, nidoranMale, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrMime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyarados, lapras, ditto, eevee, vaporeon, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew];
-
-            
-            let LetsGoEevee = new game("Lets Go Eevee", false, lge_available);
-            // all pokemon available in let's go eevee
-            LetsGoEevee.lge_available = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranFemale, nidorina, nidoqueen, nidoranMale, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrMime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyarados, lapras, ditto, eevee, vaporeon, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew];
-       
-        </script>
-    </body>
+    </script>
+</body>
 </html>
