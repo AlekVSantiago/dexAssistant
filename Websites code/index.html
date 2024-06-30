@@ -158,7 +158,7 @@
         <button id="scarlet-button" class="scarlet-button" onclick="scarletGame.switch_button('scarlet-button')">Scarlet</button>
         <button id="violet-button" class="violet-button" onclick="violetGame.switch_button('violet-button')">Violet</button>
     </div>
-    <button class="calculate-button" onclick="calculateCatchablePokemon()">calculate</button>
+    <button class="calculate-button" onclick="calculateCatchablePokemon(gameList, pokedex)">calculate</button>
 
     <script>
         class Pokemon {
@@ -183,29 +183,41 @@
                 let game = document.getElementById(gameName);
 
                 if (game.classList.contains("full-color")){
-                    game.classList.remove("full-color")
+                    game.classList.remove("full-color");
                 }
                 else{
-                    game.classList.add("full-color")
+                    game.classList.add("full-color");
                     
                 }
                console.log(`This ${this.name} button is set to ${this.on_off}`)
             }
         }
-        //calculate button planning (needs to be done)
-        //function calculate()
-            //for each game in the list
-                //if game.on_off == true 
-                    //game's pokemon into the list of available
-        //instances of all of the games for the pokemon
-        const pikachuGame = new Game("Let's Go Pikachu", []);
-        const eeveeGame = new Game("Let's Go Eevee", []);
-        const swordGame = new Game("Sword", []);
-        const shieldGame = new Game("Shield", []);
-        const scarletGame = new Game("Scarlet", []);
-        const violetGame = new Game("Scarlet", []);
 
+        //This is a prototype of the calculate function (This is not the official implementation, just a sample of what it is upposed to do for testing)
+        function calculateCatchablePokemon(gameArray, pokedex){
+            let availablePokemon = [];
+            for(let game of gameArray){
+                if (game.on_off == true){
+                    availablePokemon.push(...game.pkmn_list)
+                    console.log(`adding the pokemon from ${game.name}...`);
 
+                } 
+                else{
+                    console.log(`game ${game.name} not added`);
+                }
+            }
+            let catchPercentage = Math.round((availablePokemon.length / pokedex.length) * 100);
+            if (catchPercentage == 100){
+                console.log(`All pokemon are available!! ${catchPercentage}%`)
+            }
+            else {
+                console.log(` ${catchPercentage}% of the pokedex is available to you`);
+            }
+        }
+
+       
+
+        //initializing all of the pokemon instances (kanto only so far)
         const bulbasaur = new Pokemon("Bulbasaur", 1, "Grass", "Poison");
         const ivysaur = new Pokemon("Ivysaur", 2, "Grass", "Poison");
         const venusaur = new Pokemon("Venusaur", 3, "Grass", "Poison");
@@ -358,10 +370,18 @@
         const mewtwo = new Pokemon("Mewtwo", 150, "Psychic", null);
         const mew = new Pokemon("Mew", 151, "Psychic", null);
 
-        
-        const lgp_available = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranF, nidorina, nidoqueen, nidoranM, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrMime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyarados, lapras, ditto, eevee, vaporeon, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew];
 
-        const lge_available = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranF, nidorina, nidoqueen, nidoranM, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrMime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyarados, lapras, ditto, eevee, vaporeon, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew];
+         //initializing all of the game instances (each of the instances has placeholders for their pokemon lists just to test the program)
+         const pikachuGame = new Game("Let's Go Pikachu", [bulbasaur, ivysaur, venusaur]);
+         const eeveeGame = new Game("Let's Go Eevee", [charmander, charmeleon, charizard]);
+         const swordGame = new Game("Sword", [squirtle, wartortle, blastoise]);
+         const shieldGame = new Game("Shield", [caterpie, metapod, butterfree]);
+         const scarletGame = new Game("Scarlet", [mankey, primeape, spearow]);
+         const violetGame = new Game("Scarlet", [fearow, chansey, vileplume]);
+         //inserting all of the game instances inside of a list 
+         const gameList = [pikachuGame, eeveeGame, swordGame, shieldGame, scarletGame, violetGame];
+         const pokedex = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, mankey, primeape, spearow, fearow, chansey, vileplume]
+        
 
 
         
