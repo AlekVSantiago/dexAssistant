@@ -139,6 +139,9 @@
             background-color: #949494;
             color: white;
         }
+        .calculation-display {
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -159,14 +162,18 @@
         <button id="violet-button" class="violet-button" onclick="violetGame.switch_button('violet-button')">Violet</button>
     </div>
     <button class="calculate-button" onclick="calculateCatchablePokemon(gameList, pokedex)">calculate</button>
+    <h1 id="calcHead" class="calculation-display"></h1>
+    <h1 id="id01" class = "calculation-display"></h1>
+    <h1 id="id02" class = "calculation-display"></h1>
 
     <script>
         class Pokemon {
-            constructor(name, dexNo, type1, type2) {
+            constructor(name, dexNo, type1, type2, rarity) {
                 this.name = name;
                 this.dexNo = dexNo;
                 this.type1 = type1;
                 this.type2 = type2;
+                this.rarity = rarity;
             }
         }
 
@@ -196,6 +203,13 @@
         //This is a prototype of the calculate function (This is not the official implementation, just a sample of what it is upposed to do for testing)
         function calculateCatchablePokemon(gameArray, pokedex){
             let availablePokemon = [];
+            let mythicalCounter = 0; 
+            let legendaryCounter = 0;
+            let mythicalAvailable = 0;
+            let legendaryAvailable = 0;
+
+
+
             for(let game of gameArray){
                 if (game.on_off == true){
                     availablePokemon.push(...game.pkmn_list)
@@ -213,184 +227,222 @@
             else {
                 console.log(` ${catchPercentage}% of the pokedex is available to you`);
             }
+
+            for(let pokemon of pokedex){
+                if (pokemon.rarity == "mythical"){
+                    mythicalCounter += 1;
+                }
+                else if(pokemon.rarity == "legendary"){
+                    legendaryCounter += 1;
+            }
+            for (let pokemon of availablePokemon){
+                if (pokemon.rarity == "mythical"){
+                    mythicalAvailable += 1;
+                }
+                else if(pokemon.rarity == "legendary"){
+                    legendaryAvailable += 1;
+                }  
+            }
         }
+        console.log(`${legendaryAvailable} out of ${legendaryCounter} LEGENDARY POKEMON are available to you`)
+        console.log(`${mythicalAvailable} out of ${mythicalCounter} MYTHICAL POKEMON is available to you`)
+        document.getElementById("calcHead").innerHTML = `${catchPercentage}% of the pokedex is available to you`
+        document.getElementById("id01").innerHTML = `${legendaryAvailable} out of ${legendaryCounter} LEGENDARY POKEMON are available to you`;
+        document.getElementById("id02").innerHTML = `${mythicalAvailable} out of ${mythicalCounter} MYTHICAL POKEMON are available to you`;
+    }
 
-       
 
-        //initializing all of the pokemon instances (kanto only so far)
-        const bulbasaur = new Pokemon("Bulbasaur", 1, "Grass", "Poison");
-        const ivysaur = new Pokemon("Ivysaur", 2, "Grass", "Poison");
-        const venusaur = new Pokemon("Venusaur", 3, "Grass", "Poison");
-        const charmander = new Pokemon("Charmander", 4, "Fire", null);
-        const charmeleon = new Pokemon("Charmeleon", 5, "Fire", null);
-        const charizard = new Pokemon("Charizard", 6, "Fire", "Flying");
-        const squirtle = new Pokemon("Squirtle", 7, "Water", null);
-        const wartortle = new Pokemon("Wartortle", 8, "Water", null);
-        const blastoise = new Pokemon("Blastoise", 9, "Water", null);
-        const caterpie = new Pokemon("Caterpie", 10, "Bug", null);
-        const metapod = new Pokemon("Metapod", 11, "Bug", null);
-        const butterfree = new Pokemon("Butterfree", 12, "Bug", "Flying");
-        const weedle = new Pokemon("Weedle", 13, "Bug", "Poison");
-        const kakuna = new Pokemon("Kakuna", 14, "Bug", "Poison");
-        const beedrill = new Pokemon("Beedrill", 15, "Bug", "Poison");
-        const pidgey = new Pokemon("Pidgey", 16, "Normal", "Flying");
-        const pidgeotto = new Pokemon("Pidgeotto", 17, "Normal", "Flying");
-        const pidgeot = new Pokemon("Pidgeot", 18, "Normal", "Flying");
-        const rattata = new Pokemon("Rattata", 19, "Normal", null);
-        const raticate = new Pokemon("Raticate", 20, "Normal", null);
-        const spearow = new Pokemon("Spearow", 21, "Normal", "Flying");
-        const fearow = new Pokemon("Fearow", 22, "Normal", "Flying");
-        const ekans = new Pokemon("Ekans", 23, "Poison", null);
-        const arbok = new Pokemon("Arbok", 24, "Poison", null);
-        const pikachu = new Pokemon("Pikachu", 25, "Electric", null);
-        const raichu = new Pokemon("Raichu", 26, "Electric", null);
-        const sandshrew = new Pokemon("Sandshrew", 27, "Ground", null);
-        const sandslash = new Pokemon("Sandslash", 28, "Ground", null);
-        const nidoranF = new Pokemon("Nidoran♀", 29, "Poison", null);
-        const nidorina = new Pokemon("Nidorina", 30, "Poison", null);
-        const nidoqueen = new Pokemon("Nidoqueen", 31, "Poison", "Ground");
-        const nidoranM = new Pokemon("Nidoran♂", 32, "Poison", null);
-        const nidorino = new Pokemon("Nidorino", 33, "Poison", null);
-        const nidoking = new Pokemon("Nidoking", 34, "Poison", "Ground");
-        const clefairy = new Pokemon("Clefairy", 35, "Fairy", null);
-        const clefable = new Pokemon("Clefable", 36, "Fairy", null);
-        const vulpix = new Pokemon("Vulpix", 37, "Fire", null);
-        const ninetales = new Pokemon("Ninetales", 38, "Fire", null);
-        const jigglypuff = new Pokemon("Jigglypuff", 39, "Normal", "Fairy");
-        const wigglytuff = new Pokemon("Wigglytuff", 40, "Normal", "Fairy");
-        const zubat = new Pokemon("Zubat", 41, "Poison", "Flying");
-        const golbat = new Pokemon("Golbat", 42, "Poison", "Flying");
-        const oddish = new Pokemon("Oddish", 43, "Grass", "Poison");
-        const gloom = new Pokemon("Gloom", 44, "Grass", "Poison");
-        const vileplume = new Pokemon("Vileplume", 45, "Grass", "Poison");
-        const paras = new Pokemon("Paras", 46, "Bug", "Grass");
-        const parasect = new Pokemon("Parasect", 47, "Bug", "Grass");
-        const venonat = new Pokemon("Venonat", 48, "Bug", "Poison");
-        const venomoth = new Pokemon("Venomoth", 49, "Bug", "Poison");
-        const diglett = new Pokemon("Diglett", 50, "Ground", null);
-        const dugtrio = new Pokemon("Dugtrio", 51, "Ground", null);
-        const meowth = new Pokemon("Meowth", 52, "Normal", null);
-        const persian = new Pokemon("Persian", 53, "Normal", null);
-        const psyduck = new Pokemon("Psyduck", 54, "Water", null);
-        const golduck = new Pokemon("Golduck", 55, "Water", null);
-        const mankey = new Pokemon("Mankey", 56, "Fighting", null);
-        const primeape = new Pokemon("Primeape", 57, "Fighting", null);
-        const growlithe = new Pokemon("Growlithe", 58, "Fire", null);
-        const arcanine = new Pokemon("Arcanine", 59, "Fire", null);
-        const poliwag = new Pokemon("Poliwag", 60, "Water", null);
-        const poliwhirl = new Pokemon("Poliwhirl", 61, "Water", null);
-        const poliwrath = new Pokemon("Poliwrath", 62, "Water", "Fighting");
-        const abra = new Pokemon("Abra", 63, "Psychic", null);
-        const kadabra = new Pokemon("Kadabra", 64, "Psychic", null);
-        const alakazam = new Pokemon("Alakazam", 65, "Psychic", null);
-        const machop = new Pokemon("Machop", 66, "Fighting", null);
-        const machoke = new Pokemon("Machoke", 67, "Fighting", null);
-        const machamp = new Pokemon("Machamp", 68, "Fighting", null);
-        const bellsprout = new Pokemon("Bellsprout", 69, "Grass", "Poison");
-        const weepinbell = new Pokemon("Weepinbell", 70, "Grass", "Poison");
-        const victreebel = new Pokemon("Victreebel", 71, "Grass", "Poison");
-        const tentacool = new Pokemon("Tentacool", 72, "Water", "Poison");
-        const tentacruel = new Pokemon("Tentacruel", 73, "Water", "Poison");
-        const geodude = new Pokemon("Geodude", 74, "Rock", "Ground");
-        const graveler = new Pokemon("Graveler", 75, "Rock", "Ground");
-        const golem = new Pokemon("Golem", 76, "Rock", "Ground");
-        const ponyta = new Pokemon("Ponyta", 77, "Fire", null);
-        const rapidash = new Pokemon("Rapidash", 78, "Fire", null);
-        const slowpoke = new Pokemon("Slowpoke", 79, "Water", "Psychic");
-        const slowbro = new Pokemon("Slowbro", 80, "Water", "Psychic");
-        const magnemite = new Pokemon("Magnemite", 81, "Electric", "Steel");
-        const magneton = new Pokemon("Magneton", 82, "Electric", "Steel");
-        const farfetchd = new Pokemon("Farfetch'd", 83, "Normal", "Flying");
-        const doduo = new Pokemon("Doduo", 84, "Normal", "Flying");
-        const dodrio = new Pokemon("Dodrio", 85, "Normal", "Flying");
-        const seel = new Pokemon("Seel", 86, "Water", null);
-        const dewgong = new Pokemon("Dewgong", 87, "Water", "Ice");
-        const grimer = new Pokemon("Grimer", 88, "Poison", null);
-        const muk = new Pokemon("Muk", 89, "Poison", null);
-        const shellder = new Pokemon("Shellder", 90, "Water", null);
-        const cloyster = new Pokemon("Cloyster", 91, "Water", "Ice");
-        const gastly = new Pokemon("Gastly", 92, "Ghost", "Poison");
-        const haunter = new Pokemon("Haunter", 93, "Ghost", "Poison");
-        const gengar = new Pokemon("Gengar", 94, "Ghost", "Poison");
-        const onix = new Pokemon("Onix", 95, "Rock", "Ground");
-        const drowzee = new Pokemon("Drowzee", 96, "Psychic", null);
-        const hypno = new Pokemon("Hypno", 97, "Psychic", null);
-        const krabby = new Pokemon("Krabby", 98, "Water", null);
-        const kingler = new Pokemon("Kingler", 99, "Water", null);
-        const voltorb = new Pokemon("Voltorb", 100, "Electric", null);
-        const electrode = new Pokemon("Electrode", 101, "Electric", null);
-        const exeggcute = new Pokemon("Exeggcute", 102, "Grass", "Psychic");
-        const exeggutor = new Pokemon("Exeggutor", 103, "Grass", "Psychic");
-        const cubone = new Pokemon("Cubone", 104, "Ground", null);
-        const marowak = new Pokemon("Marowak", 105, "Ground", null);
-        const hitmonlee = new Pokemon("Hitmonlee", 106, "Fighting", null);
-        const hitmonchan = new Pokemon("Hitmonchan", 107, "Fighting", null);
-        const lickitung = new Pokemon("Lickitung", 108, "Normal", null);
-        const koffing = new Pokemon("Koffing", 109, "Poison", null);
-        const weezing = new Pokemon("Weezing", 110, "Poison", null);
-        const rhyhorn = new Pokemon("Rhyhorn", 111, "Ground", "Rock");
-        const rhydon = new Pokemon("Rhydon", 112, "Ground", "Rock");
-        const chansey = new Pokemon("Chansey", 113, "Normal", null);
-        const tangela = new Pokemon("Tangela", 114, "Grass", null);
-        const kangaskhan = new Pokemon("Kangaskhan", 115, "Normal", null);
-        const horsea = new Pokemon("Horsea", 116, "Water", null);
-        const seadra = new Pokemon("Seadra", 117, "Water", null);
-        const goldeen = new Pokemon("Goldeen", 118, "Water", null);
-        const seaking = new Pokemon("Seaking", 119, "Water", null);
-        const staryu = new Pokemon("Staryu", 120, "Water", null);
-        const starmie = new Pokemon("Starmie", 121, "Water", "Psychic");
-        const mrMime = new Pokemon("Mr. Mime", 122, "Psychic", "Fairy");
-        const scyther = new Pokemon("Scyther", 123, "Bug", "Flying");
-        const jynx = new Pokemon("Jynx", 124, "Ice", "Psychic");
-        const electabuzz = new Pokemon("Electabuzz", 125, "Electric", null);
-        const magmar = new Pokemon("Magmar", 126, "Fire", null);
-        const pinsir = new Pokemon("Pinsir", 127, "Bug", null);
-        const tauros = new Pokemon("Tauros", 128, "Normal", null);
-        const magikarp = new Pokemon("Magikarp", 129, "Water", null);
-        const gyarados = new Pokemon("Gyarados", 130, "Water", "Flying");
-        const lapras = new Pokemon("Lapras", 131, "Water", "Ice");
-        const ditto = new Pokemon("Ditto", 132, "Normal", null);
-        const eevee = new Pokemon("Eevee", 133, "Normal", null);
-        const vaporeon = new Pokemon("Vaporeon", 134, "Water", null);
-        const jolteon = new Pokemon("Jolteon", 135, "Electric", null);
-        const flareon = new Pokemon("Flareon", 136, "Fire", null);
-        const porygon = new Pokemon("Porygon", 137, "Normal", null);
-        const omanyte = new Pokemon("Omanyte", 138, "Rock", "Water");
-        const omastar = new Pokemon("Omastar", 139, "Rock", "Water");
-        const kabuto = new Pokemon("Kabuto", 140, "Rock", "Water");
-        const kabutops = new Pokemon("Kabutops", 141, "Rock", "Water");
-        const aerodactyl = new Pokemon("Aerodactyl", 142, "Rock", "Flying");
-        const snorlax = new Pokemon("Snorlax", 143, "Normal", null);
-        const articuno = new Pokemon("Articuno", 144, "Ice", "Flying");
-        const zapdos = new Pokemon("Zapdos", 145, "Electric", "Flying");
-        const moltres = new Pokemon("Moltres", 146, "Fire", "Flying");
-        const dratini = new Pokemon("Dratini", 147, "Dragon", null);
-        const dragonair = new Pokemon("Dragonair", 148, "Dragon", null);
-        const dragonite = new Pokemon("Dragonite", 149, "Dragon", "Flying");
-        const mewtwo = new Pokemon("Mewtwo", 150, "Psychic", null);
-        const mew = new Pokemon("Mew", 151, "Psychic", null);
+        
+        //creation of instances of every pokemon (Kanto), ...TO BE CONTINUED
+        const bulbasaur = new Pokemon("Bulbasaur", 1, "Grass", "Poison", "regular");
+        const ivysaur = new Pokemon("Ivysaur", 2, "Grass", "Poison", "regular");
+        const venusaur = new Pokemon("Venusaur", 3, "Grass", "Poison", "regular");
+        const charmander = new Pokemon("Charmander", 4, "Fire", null, "regular");
+        const charmeleon = new Pokemon("Charmeleon", 5, "Fire", null, "regular");
+        const charizard = new Pokemon("Charizard", 6, "Fire", "Flying", "regular");
+        const squirtle = new Pokemon("Squirtle", 7, "Water", null, "regular");
+        const wartortle = new Pokemon("Wartortle", 8, "Water", null, "regular");
+        const blastoise = new Pokemon("Blastoise", 9, "Water", null, "regular");
+        const caterpie = new Pokemon("Caterpie", 10, "Bug", null, "regular");
+        const metapod = new Pokemon("Metapod", 11, "Bug", null, "regular");
+        const butterfree = new Pokemon("Butterfree", 12, "Bug", "Flying", "regular");
+        const weedle = new Pokemon("Weedle", 13, "Bug", "Poison", "regular");
+        const kakuna = new Pokemon("Kakuna", 14, "Bug", "Poison", "regular");
+        const beedrill = new Pokemon("Beedrill", 15, "Bug", "Poison", "regular");
+        const pidgey = new Pokemon("Pidgey", 16, "Normal", "Flying", "regular");
+        const pidgeotto = new Pokemon("Pidgeotto", 17, "Normal", "Flying", "regular");
+        const pidgeot = new Pokemon("Pidgeot", 18, "Normal", "Flying", "regular");
+        const rattata = new Pokemon("Rattata", 19, "Normal", null, "regular");
+        const raticate = new Pokemon("Raticate", 20, "Normal", null, "regular");
+        const spearow = new Pokemon("Spearow", 21, "Normal", "Flying", "regular");
+        const fearow = new Pokemon("Fearow", 22, "Normal", "Flying", "regular");
+        const ekans = new Pokemon("Ekans", 23, "Poison", null, "regular");
+        const arbok = new Pokemon("Arbok", 24, "Poison", null, "regular");
+        const pikachu = new Pokemon("Pikachu", 25, "Electric", null, "regular");
+        const raichu = new Pokemon("Raichu", 26, "Electric", null, "regular");
+        const sandshrew = new Pokemon("Sandshrew", 27, "Ground", null, "regular");
+        const sandslash = new Pokemon("Sandslash", 28, "Ground", null, "regular");
+        const nidoranF = new Pokemon("Nidoran♀", 29, "Poison", null, "regular");
+        const nidorina = new Pokemon("Nidorina", 30, "Poison", null, "regular");
+        const nidoqueen = new Pokemon("Nidoqueen", 31, "Poison", "Ground", "regular");
+        const nidoranM = new Pokemon("Nidoran♂", 32, "Poison", null, "regular");
+        const nidorino = new Pokemon("Nidorino", 33, "Poison", null, "regular");
+        const nidoking = new Pokemon("Nidoking", 34, "Poison", "Ground", "regular");
+        const clefairy = new Pokemon("Clefairy", 35, "Fairy", null, "regular");
+        const clefable = new Pokemon("Clefable", 36, "Fairy", null, "regular");
+        const vulpix = new Pokemon("Vulpix", 37, "Fire", null, "regular");
+        const ninetales = new Pokemon("Ninetales", 38, "Fire", null, "regular");
+        const jigglypuff = new Pokemon("Jigglypuff", 39, "Normal", "Fairy", "regular");
+        const wigglytuff = new Pokemon("Wigglytuff", 40, "Normal", "Fairy", "regular");
+        const zubat = new Pokemon("Zubat", 41, "Poison", "Flying", "regular");
+        const golbat = new Pokemon("Golbat", 42, "Poison", "Flying", "regular");
+        const oddish = new Pokemon("Oddish", 43, "Grass", "Poison", "regular");
+        const gloom = new Pokemon("Gloom", 44, "Grass", "Poison", "regular");
+        const vileplume = new Pokemon("Vileplume", 45, "Grass", "Poison", "regular");
+        const paras = new Pokemon("Paras", 46, "Bug", "Grass", "regular");
+        const parasect = new Pokemon("Parasect", 47, "Bug", "Grass", "regular");
+        const venonat = new Pokemon("Venonat", 48, "Bug", "Poison", "regular");
+        const venomoth = new Pokemon("Venomoth", 49, "Bug", "Poison", "regular");
+        const diglett = new Pokemon("Diglett", 50, "Ground", null, "regular");
+        const dugtrio = new Pokemon("Dugtrio", 51, "Ground", null, "regular");
+        const meowth = new Pokemon("Meowth", 52, "Normal", null, "regular");
+        const persian = new Pokemon("Persian", 53, "Normal", null, "regular");
+        const psyduck = new Pokemon("Psyduck", 54, "Water", null, "regular");
+        const golduck = new Pokemon("Golduck", 55, "Water", null, "regular");
+        const mankey = new Pokemon("Mankey", 56, "Fighting", null, "regular");
+        const primeape = new Pokemon("Primeape", 57, "Fighting", null, "regular");
+        const growlithe = new Pokemon("Growlithe", 58, "Fire", null, "regular");
+        const arcanine = new Pokemon("Arcanine", 59, "Fire", null, "regular");
+        const poliwag = new Pokemon("Poliwag", 60, "Water", null, "regular");
+        const poliwhirl = new Pokemon("Poliwhirl", 61, "Water", null, "regular");
+        const poliwrath = new Pokemon("Poliwrath", 62, "Water", "Fighting", "regular");
+        const abra = new Pokemon("Abra", 63, "Psychic", null, "regular");
+        const kadabra = new Pokemon("Kadabra", 64, "Psychic", null, "regular");
+        const alakazam = new Pokemon("Alakazam", 65, "Psychic", null, "regular");
+        const machop = new Pokemon("Machop", 66, "Fighting", null, "regular");
+        const machoke = new Pokemon("Machoke", 67, "Fighting", null, "regular");
+        const machamp = new Pokemon("Machamp", 68, "Fighting", null, "regular");
+        const bellsprout = new Pokemon("Bellsprout", 69, "Grass", "Poison", "regular");
+        const weepinbell = new Pokemon("Weepinbell", 70, "Grass", "Poison", "regular");
+        const victreebel = new Pokemon("Victreebel", 71, "Grass", "Poison", "regular");
+        const tentacool = new Pokemon("Tentacool", 72, "Water", "Poison", "regular");
+        const tentacruel = new Pokemon("Tentacruel", 73, "Water", "Poison", "regular");
+        const geodude = new Pokemon("Geodude", 74, "Rock", "Ground", "regular");
+        const graveler = new Pokemon("Graveler", 75, "Rock", "Ground", "regular");
+        const golem = new Pokemon("Golem", 76, "Rock", "Ground", "regular");
+        const ponyta = new Pokemon("Ponyta", 77, "Fire", null, "regular");
+        const rapidash = new Pokemon("Rapidash", 78, "Fire", null, "regular");
+        const slowpoke = new Pokemon("Slowpoke", 79, "Water", "Psychic", "regular");
+        const slowbro = new Pokemon("Slowbro", 80, "Water", "Psychic", "regular");
+        const magnemite = new Pokemon("Magnemite", 81, "Electric", "Steel", "regular");
+        const magneton = new Pokemon("Magneton", 82, "Electric", "Steel", "regular");
+        const farfetchd = new Pokemon("Farfetch'd", 83, "Normal", "Flying", "regular");
+        const doduo = new Pokemon("Doduo", 84, "Normal", "Flying", "regular");
+        const dodrio = new Pokemon("Dodrio", 85, "Normal", "Flying", "regular");
+        const seel = new Pokemon("Seel", 86, "Water", null, "regular");
+        const dewgong = new Pokemon("Dewgong", 87, "Water", "Ice", "regular");
+        const grimer = new Pokemon("Grimer", 88, "Poison", null, "regular");
+        const muk = new Pokemon("Muk", 89, "Poison", null, "regular");
+        const shellder = new Pokemon("Shellder", 90, "Water", null, "regular");
+        const cloyster = new Pokemon("Cloyster", 91, "Water", "Ice", "regular");
+        const gastly = new Pokemon("Gastly", 92, "Ghost", "Poison", "regular");
+        const haunter = new Pokemon("Haunter", 93, "Ghost", "Poison", "regular");
+        const gengar = new Pokemon("Gengar", 94, "Ghost", "Poison", "regular");
+        const onix = new Pokemon("Onix", 95, "Rock", "Ground", "regular");
+        const drowzee = new Pokemon("Drowzee", 96, "Psychic", null, "regular");
+        const hypno = new Pokemon("Hypno", 97, "Psychic", null, "regular");
+        const krabby = new Pokemon("Krabby", 98, "Water", null, "regular");
+        const kingler = new Pokemon("Kingler", 99, "Water", null, "regular");
+        const voltorb = new Pokemon("Voltorb", 100, "Electric", null, "regular");
+        const electrode = new Pokemon("Electrode", 101, "Electric", null, "regular");
+        const exeggcute = new Pokemon("Exeggcute", 102, "Grass", "Psychic", "regular");
+        const exeggutor = new Pokemon("Exeggutor", 103, "Grass", "Psychic", "regular");
+        const cubone = new Pokemon("Cubone", 104, "Ground", null, "regular");
+        const marowak = new Pokemon("Marowak", 105, "Ground", null, "regular");
+        const hitmonlee = new Pokemon("Hitmonlee", 106, "Fighting", null, "regular");
+        const hitmonchan = new Pokemon("Hitmonchan", 107, "Fighting", null, "regular");
+        const lickitung = new Pokemon("Lickitung", 108, "Normal", null, "regular");
+        const koffing = new Pokemon("Koffing", 109, "Poison", null, "regular");
+        const weezing = new Pokemon("Weezing", 110, "Poison", null, "regular");
+        const rhyhorn = new Pokemon("Rhyhorn", 111, "Ground", "Rock", "regular");
+        const rhydon = new Pokemon("Rhydon", 112, "Ground", "Rock", "regular");
+        const chansey = new Pokemon("Chansey", 113, "Normal", null, "regular");
+        const tangela = new Pokemon("Tangela", 114, "Grass", null, "regular");
+        const kangaskhan = new Pokemon("Kangaskhan", 115, "Normal", null, "regular");
+        const horsea = new Pokemon("Horsea", 116, "Water", null, "regular");
+        const seadra = new Pokemon("Seadra", 117, "Water", null, "regular");
+        const goldeen = new Pokemon("Goldeen", 118, "Water", null, "regular");
+        const seaking = new Pokemon("Seaking", 119, "Water", null, "regular");
+        const staryu = new Pokemon("Staryu", 120, "Water", null, "regular");
+        const starmie = new Pokemon("Starmie", 121, "Water", "Psychic", "regular");
+        const mrMime = new Pokemon("Mr. Mime", 122, "Psychic", "Fairy", "regular");
+        const scyther = new Pokemon("Scyther", 123, "Bug", "Flying", "regular");
+        const jynx = new Pokemon("Jynx", 124, "Ice", "Psychic", "regular");
+        const electabuzz = new Pokemon("Electabuzz", 125, "Electric", null, "regular");
+        const magmar = new Pokemon("Magmar", 126, "Fire", null, "regular");
+        const pinsir = new Pokemon("Pinsir", 127, "Bug", null, "regular");
+        const tauros = new Pokemon("Tauros", 128, "Normal", null, "regular");
+        const magikarp = new Pokemon("Magikarp", 129, "Water", null, "regular");
+        const gyarados = new Pokemon("Gyarados", 130, "Water", "Flying", "regular");
+        const lapras = new Pokemon("Lapras", 131, "Water", "Ice", "regular");
+        const ditto = new Pokemon("Ditto", 132, "Normal", null, "regular");
+        const eevee = new Pokemon("Eevee", 133, "Normal", null, "regular");
+        const vaporeon = new Pokemon("Vaporeon", 134, "Water", null, "regular");
+        const jolteon = new Pokemon("Jolteon", 135, "Electric", null, "regular");
+        const flareon = new Pokemon("Flareon", 136, "Fire", null, "regular");
+        const porygon = new Pokemon("Porygon", 137, "Normal", null, "regular");
+        const omanyte = new Pokemon("Omanyte", 138, "Rock", "Water", "regular");
+        const omastar = new Pokemon("Omastar", 139, "Rock", "Water", "regular");
+        const kabuto = new Pokemon("Kabuto", 140, "Rock", "Water", "regular");
+        const kabutops = new Pokemon("Kabutops", 141, "Rock", "Water", "regular");
+        const aerodactyl = new Pokemon("Aerodactyl", 142, "Rock", "Flying", "regular");
+        const snorlax = new Pokemon("Snorlax", 143, "Normal", null, "regular");
+        const articuno = new Pokemon("Articuno", 144, "Ice", "Flying", "legendary");
+        const zapdos = new Pokemon("Zapdos", 145, "Electric", "Flying", "legendary");
+        const moltres = new Pokemon("Moltres", 146, "Fire", "Flying", "legendary");
+        const dratini = new Pokemon("Dratini", 147, "Dragon", null, "regular");
+        const dragonair = new Pokemon("Dragonair", 148, "Dragon", null, "regular");
+        const dragonite = new Pokemon("Dragonite", 149, "Dragon", "Flying", "regular");
+        const mewtwo = new Pokemon("Mewtwo", 150, "Psychic", null, "legendary");
+        const mew = new Pokemon("Mew", 151, "Psychic", null, "mythical");
+        
+        const chikorita = new Pokemon("Chikorita", 152, "Grass", null, "regular");
+        const bayleef = new Pokemon("Bayleef", 153, "Grass", null, "regular");
+        const meganium = new Pokemon("Meganium", 154, "Grass", null, "regular");
+        const cyndaquil = new Pokemon("Cyndaquil", 155, "Fire", null, "regular");
+        const quilava = new Pokemon("Quilava", 156, "Fire", null, "regular");
+        const typhlosion = new Pokemon("Typhlosion", 157, "Fire", null, "regular");
+        const tododile = new Pokemon("Tododile", 158, "Water", null, "regular");
+        const croconaw = new Pokemon("Croconaw", 159, "Water", null, "regular");
+        const feraligatr = new Pokemon("Feraligatr", 160, "Water", null, "regular");
+        const sentret = new Pokemon("Sentret", 161, "Normal", null, "regular");
+        const furret = new Pokemon("Furret", 162, "normal", null, "regular");
+        const hoothoot = new Pokemon("Hoothoot", 163, "Normal", "Flying", "regular");
+        const noctowl = new Pokemon("Noctowl", 164, "Normal", "Flying", "regular");
 
+        
 
          //initializing all of the game instances (each of the instances has placeholders for their pokemon lists just to test the program)
-         const pikachuGame = new Game("Let's Go Pikachu", [bulbasaur, ivysaur, venusaur]);
-         const eeveeGame = new Game("Let's Go Eevee", [charmander, charmeleon, charizard]);
-         const swordGame = new Game("Sword", [squirtle, wartortle, blastoise]);
-         const shieldGame = new Game("Shield", [caterpie, metapod, butterfree]);
-         const scarletGame = new Game("Scarlet", [mankey, primeape, spearow]);
-         const violetGame = new Game("Scarlet", [fearow, chansey, vileplume]);
+         const pikachuGame = new Game("Let's Go Pikachu", []);
+         const eeveeGame = new Game("Let's Go Eevee", []);
+         const swordGame = new Game("Sword", []);
+         const shieldGame = new Game("Shield", []);
+         const scarletGame = new Game("Scarlet", []);
+         const violetGame = new Game("Scarlet", []);
+
          //inserting all of the game instances inside of a list 
          const gameList = [pikachuGame, eeveeGame, swordGame, shieldGame, scarletGame, violetGame];
-         const pokedex = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, mankey, primeape, spearow, fearow, chansey, vileplume]
-        
 
+         //a list containing all the instances of every pokemon
+         const pokedex = [
+         //Kanto Pokemon
+         bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranF, nidorina, nidoqueen, nidoranM, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrMime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyarados, lapras, ditto, eevee, vaporeon, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew,
+         
+         //Johto Pokemon
+         chikorita, 
+         ];
 
-        
-
-        
-
-
-       
-
+         
     </script>
 </body>
 </html>
